@@ -127,72 +127,69 @@ for codigo in sorted(infos_intervencoes.keys()):
 
 # ------------------- PAGINAS MARCAS E MODELOS -------------------
 
-links_marcas = ""
+tabela_marcas_modelos = "<table border='1'><tr><th>Marca</th><th>Modelo</th></tr>"
 
 for marca in sorted(infos_marcas.keys()):
-    info = infos_marcas[marca]
+     info = infos_marcas[marca]
+     for modelo in sorted(info["modelos"].keys()):
+          tabela_marcas_modelos += f"<tr><td><a href='{marca}.html'>{marca}</a></td><td><a href='{marca}_{modelo}.html'>{modelo}</a></td></tr>"
 
-    links_marcas += f'''
-    <li>
-        <a href="{marca}.html"> Marca: {marca} </a>
-    </li>
-    '''
+          # página modelo
+          matriculas = "".join([f"<li>{m}</li>" for m in sorted(info["modelos"][modelo])])
+          modelo_html = f'''
+          <html>
+               <head>
+                    <title>{marca} - {modelo}</title>
+                    <meta charset="utf-8"/>
+               </head>
+               <body>
+                    <h3>{marca} - {modelo}</h3>
+                    <h4>Matrículas</h4>
+                    <ul>
+                         {matriculas}
+                    </ul>
+                    <hr/>
+                    <a href="{marca}.html">Voltar à marca</a>
+               </body>
+          </html>
+          '''
+          new_file(f"./TP1/output/{marca}_{modelo}.html", modelo_html)
 
-    modelos_links = ""
+     # página marca
+     modelos_links = "".join([f'<li><a href="{marca}_{modelo}.html">{modelo}</a></li>' for modelo in sorted(info["modelos"].keys())])
+     marca_html = f'''
+     <html>
+          <head>
+               <title>{marca}</title>
+               <meta charset="utf-8"/>
+          </head>
+          <body>
+               <h3>{marca}</h3>
+               <p>Número de modelos: {len(info["modelos"])}</p>
+               <ul>
+                    {modelos_links}
+               </ul>
+               <hr/>
+               <a href="marcas_modelos.html">Voltar às marcas</a>
+          </body>
+     </html>
+     '''
+     new_file(f"./TP1/output/{marca}.html", marca_html)
 
-    for modelo in sorted(info["modelos"].keys()):
-
-        # criar página do modelo
-        matriculas = ""
-        for m in sorted(info["modelos"][modelo]):
-            matriculas += f"<li>{m}</li>"
-
-        pag_modelo = f'''
-        <html>
-            <head>
-                <title>{marca} - {modelo}</title>
-                <meta charset="utf-8"/>
-            </head>
-            <body>
-                <h3>{marca} - {modelo}</h3>
-                <h4>Matrículas</h4>
-                <ul>
-                    {matriculas}
-                </ul>
-                <hr/>
-                <a href="{marca}.html">Voltar à marca</a>
-            </body>
-        </html>
-        '''
-
-        new_file(f"./TP1/output/{marca}_{modelo}.html", pag_modelo)
-
-        modelos_links += f'''
-        <li>
-            <a href="{marca}_{modelo}.html">{modelo}</a>
-        </li>
-        '''
-
-    # criar página da marca
-    pag_marca = f'''
-    <html>
-        <head>
-            <title>{marca}</title>
-            <meta charset="utf-8"/>
-        </head>
-        <body>
-            <h3>{marca}</h3>
-            <p>Número de modelos: {len(info["modelos"])}</p>
-            <ul>
-                {modelos_links}
-            </ul>
-            <hr/>
-            <a href="marcas_modelos.html">Voltar às marcas</a>
-        </body>
-    </html>
-    '''
-
-    new_file(f"./TP1/output/{marca}.html", pag_marca)     
+     # página geral marcas_modelos
+     pag_marcas_modelos = f'''
+     <html>
+          <head>
+               <title>Marcas e Modelos</title>
+               <meta charset="utf-8"/>
+          </head>
+          <body>
+               <h3>Marcas e Modelos</h3>
+                    {tabela_marcas_modelos}
+          </body>
+     </html>
+     '''
+     new_file("./TP1/output/marcas_modelos.html", pag_marcas_modelos) 
 
 # -------------------------------------------------------------------------------------------
 
@@ -225,4 +222,3 @@ html = f'''
 new_file("./TP1/output/index.html", html)
 new_file("./TP1/output/reparacoes.html", links_reparacoes)
 new_file("./TP1/output/intervencoes.html", links_intervencoes)
-new_file("./TP1/output/marcas_modelos.html", links_marcas)
