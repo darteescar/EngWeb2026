@@ -28,6 +28,11 @@ n = 1
 tipos_intervencao = {}
 links_intervencoes = ""
 
+## Pagina Marcas e Modelos
+marcas_modelos = {}
+links_marcas_modelos = ""
+
+
 for rep in dataset["reparacoes"]:
 
      ## Pagina Reparacões
@@ -70,10 +75,32 @@ for rep in dataset["reparacoes"]:
           }
      tipos_intervencao[codigo]["reparacoes"].append(n)
 
+     ## Pagina Marcas e Modelos
+     marca = rep["viatura"]["marca"]
+     modelo = rep["viatura"]["modelo"]
+
+     # se a marca ainda não existir
+     if marca not in marcas_modelos:
+          marcas_modelos[marca] = {}
+
+     # se o modelo ainda não existir dentro da marca
+     if modelo not in marcas_modelos[marca]:
+          marcas_modelos[marca][modelo] = {
+               "contador": 0,
+               "reparacoes": [],
+               "intervencoes": []
+          }
+
+     marcas_modelos[marca][modelo]["contador"] += 1
+     marcas_modelos[marca][modelo]["reparacoes"].append(n)
+     for intervencao in rep["intervencoes"]:
+          marcas_modelos[marca][modelo]["intervencoes"].append(intervencao["codigo"])
+
      n += 1
 
 n = 1
 
+## Pagina Tipos de Intervenção
 for cod_de_intervencao in sorted(tipos_intervencao.keys()):
      intervencao = tipos_intervencao[cod_de_intervencao]
      
@@ -111,11 +138,66 @@ for cod_de_intervencao in sorted(tipos_intervencao.keys()):
                </ul>
                <hr/>
           </body>
-          </html>
+     </html>
      '''
      new_file(f"./TP1/output/intervencao{n}.html", pagina_intervencao)
 
      n += 1
+
+## Pagina Marcas e Modelos
+for chave_marca in sorted(marcas_modelos.keys()):
+     marca = marcas_modelos[chave_marca]
+
+     for chave_modelo in sorted(marca.keys()):
+          modelo = marca[chave_modelo]
+
+          comp = len(modelo["intervencoes"])
+
+          links_marcas_modelos += f'''
+               <li>
+                    <a href="{chave_marca}{chave_modelo}.html"> {chave_marca} {chave_modelo} - reparações: {modelo["contador"]} - intervenções: {comp}</a>
+               </li>
+          '''
+
+          lista_reparacoes_deste_modelo = ""
+          for reparacao in modelo["reparacoes"]:
+               lista_reparacoes_deste_modelo += f'''
+               <li>
+                    <a href="reparacao{reparacao}.html"> Reparação {reparacao} </a>
+               </li>
+               '''
+
+          lista_intervencoes_deste_modelo = ""
+          for intervencao in modelo["intervencoes"]:
+               lista_intervencoes_deste_modelo += f'''
+               <li>
+                    <a href="intervencao{intervencao}.html"> Intervenção {intervencao} </a>
+               </li>
+          '''
+
+          pagina_modelo = f'''
+          <html>
+               <head>
+                    <title> {chave_marca} {chave_modelo} </title>
+                    <meta charset="utf-8"/>
+               </head>
+               <body>
+                    <h2> {chave_marca} {chave_modelo} </h3>
+                    <h3> Número de reparações: {modelo["contador"]}
+                    <h3> Reparações feitas neste modelo: </h3>
+                    <ul>
+                         {lista_reparacoes_deste_modelo}
+                    </ul>
+                    <h3> Intervenções feitas neste modelo: </h3>
+                    <ul>
+                         {lista_intervencoes_deste_modelo}
+                    </ul>
+               </body>
+          </html>
+          '''
+
+
+          new_file(f"./TP1/output/{chave_marca}{chave_modelo}.html", pagina_modelo)
 
 pagina_inicial = f'''
 <html>
@@ -140,6 +222,7 @@ pagina_inicial = f'''
 
           </ul>
      </body>
+</html>
 '''
 pagina_reparacoes = f'''
 <html>
@@ -153,6 +236,7 @@ pagina_reparacoes = f'''
                {links_reparacoes}
           </ul>
      </body>
+</html>
 '''
 pagina_intervencoes = f'''
 <html>
@@ -166,11 +250,24 @@ pagina_intervencoes = f'''
                {links_intervencoes}
           </ul>
      </body>
+</html>
 '''
-pagina_marcas_e_modelos = ""
-
-
+pagina_marcas_e_modelos = f'''
+<html>
+     <head>
+          <title> Lista de Marcas e Modelos </title>
+          <meta charset="utf-8"/>
+     </head>
+     <body>
+          <h3> Lista de Marcas e Modelos  </h3>
+          <ul>
+               {links_marcas_modelos}
+          </ul>
+     </body>
+</html>
+'''
 
 new_file("./TP1/output/index.html", pagina_inicial)
 new_file("./TP1/output/pagina_reparacoes.html", pagina_reparacoes)
 new_file("./TP1/output/pagina_intervencoes.html", pagina_intervencoes)
+new_file("./TP1/output/pagina_marcas_e_modelos.html", pagina_marcas_e_modelos)
