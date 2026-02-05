@@ -107,7 +107,7 @@ for cod_de_intervencao in sorted(tipos_intervencao.keys()):
      ## Links para a página principal das intervenções
      links_intervencoes += f'''
      <li>
-          <a href="intervencao{n}.html"> Intervenção {n} </a>
+          <a href="intervencao{cod_de_intervencao}.html"> Intervenção {cod_de_intervencao} </a>
      </li>
      '''
 
@@ -140,7 +140,7 @@ for cod_de_intervencao in sorted(tipos_intervencao.keys()):
           </body>
      </html>
      '''
-     new_file(f"./TP1/output/intervencao{n}.html", pagina_intervencao)
+     new_file(f"./TP1/output/intervencao{cod_de_intervencao}.html", pagina_intervencao)
 
      n += 1
 
