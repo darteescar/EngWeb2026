@@ -17,8 +17,8 @@ def new_file(filename, content):
      with open(filename, 'w', encoding='utf-8') as f:
           f.write(content)
 
-dataset = open_json('TP1/dataset_reparacoes.json')
-mk_dir("TP1/output")
+dataset = open_json('dataset_reparacoes.json')
+mk_dir("output")
 
 ## Pagina Reparacões
 links_reparacoes = ""
@@ -58,11 +58,11 @@ for rep in dataset["reparacoes"]:
                     <tr> <td> Nº Intervenções </td> <td> {rep["nr_intervencoes"]} </td> </tr>
                </table>
                <hr/>
-
+               <a href="pagina_reparacoes.html"> Voltar à lista de reparações </a>
           </body>
      </html>
      '''
-     new_file(f"./TP1/output/reparacao{n}.html", pagina_reparacao)
+     new_file(f"./output/reparacao{n}.html", pagina_reparacao)
 
      ## Pagina Tipos de Intervenção
      for intervencao in rep["intervencoes"]:
@@ -136,11 +136,12 @@ for cod_de_intervencao in sorted(tipos_intervencao.keys()):
                <ul>
                     {lista_reparacoes_desta_intervencao}
                </ul>
+               <a href="pagina_intervencoes.html"> Voltar à lista de intervenções </a>
                <hr/>
           </body>
      </html>
      '''
-     new_file(f"./TP1/output/intervencao{cod_de_intervencao}.html", pagina_intervencao)
+     new_file(f"./output/intervencao{cod_de_intervencao}.html", pagina_intervencao)
 
      n += 1
 
@@ -192,12 +193,13 @@ for chave_marca in sorted(marcas_modelos.keys()):
                     <ul>
                          {lista_intervencoes_deste_modelo}
                     </ul>
+                    <a href="pagina_marcas_e_modelos.html"> Voltar à lista de marcas e modelos </a>
                </body>
           </html>
           '''
 
 
-          new_file(f"./TP1/output/{chave_marca}{chave_modelo}.html", pagina_modelo)
+          new_file(f"./output/{chave_marca}{chave_modelo}.html", pagina_modelo)
 
 pagina_inicial = f'''
 <html>
@@ -235,6 +237,7 @@ pagina_reparacoes = f'''
           <ul>
                {links_reparacoes}
           </ul>
+          <a href="index.html"> Voltar à página inicial </a>
      </body>
 </html>
 '''
@@ -249,6 +252,7 @@ pagina_intervencoes = f'''
           <ul>
                {links_intervencoes}
           </ul>
+          <a href="index.html"> Voltar à página inicial </a>
      </body>
 </html>
 '''
@@ -263,11 +267,12 @@ pagina_marcas_e_modelos = f'''
           <ul>
                {links_marcas_modelos}
           </ul>
+          <a href="index.html"> Voltar à página inicial </a>
      </body>
 </html>
 '''
 
-new_file("./TP1/output/index.html", pagina_inicial)
-new_file("./TP1/output/pagina_reparacoes.html", pagina_reparacoes)
-new_file("./TP1/output/pagina_intervencoes.html", pagina_intervencoes)
-new_file("./TP1/output/pagina_marcas_e_modelos.html", pagina_marcas_e_modelos)
+new_file("./output/index.html", pagina_inicial)
+new_file("./output/pagina_reparacoes.html", pagina_reparacoes)
+new_file("./output/pagina_intervencoes.html", pagina_intervencoes)
+new_file("./output/pagina_marcas_e_modelos.html", pagina_marcas_e_modelos)
