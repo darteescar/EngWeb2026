@@ -1,13 +1,18 @@
-## TP1 - Estrutura de um website de exploração de um dataset
+# Metainformação 
 
-**Autor**: A106936 <br>
-**Nome**: Duarte Escairo Brandão Reis Silva <br>
+**Título**: TP1 - Estrutura de um website de exploração de um dataset <br>
 **Data**: 11/2/2025 <br>
+**Autor**: Duarte Escairo <br>
 **UC**: Engenharia Web
 
-![foto](163868866.jpeg)
-
 ---
+
+# Autor
+
+**ID**: A106936 <br>
+**Nome**: Duarte Escairo Brandão Reis Silva <br>
+
+![foto](163868866.jpg)
 
 # Resumo:
 
@@ -26,14 +31,17 @@ Depois, com esses dicionários, percorre cada tipo de intervenção e cada marca
 # Resultados:
 
 - [script](./script.py) - O script Python que gera as páginas HTML a partir do dataset.
+- [dataset](./dataset_reparacoes.json) - O dataset de reparações utilizado para gerar as páginas HTML.
+- [index](./index.html) - A página principal do website onde se encontram os links para as páginas de reparações, intervenções e marcas/modelos.
+- [reparacoes](./pagina_reparacoes/) - A página que lista todas as reparações, com links para as páginas individuais de cada reparação.
+- [intervencoes](./pagina_intervencoes/) - A página que lista todas as intervenções, com links para as páginas individuais de cada intervenção.
+- [marcas_e_modelos](./pagina_marcas_e_modelos/) - A página que lista todas as marcas e modelos, com links para as páginas individuais de cada modelo.
+- as páginas de cada reparação, intervenção e modelo, que contêm detalhes específicos sobre cada uma.
 
 # Execução:
 
-Para executar o script, pode fazê-lo de duas formas:
-1. **Usando o terminal**: Navegue até a pasta onde está a pasta `TP1` e execute o comando:
+Para executar o script, basta:
 
 ```bash
 python3 TP1/script.py
 ```
-
-2. **Usando um ambiente de desenvolvimento**: Abra o script `script.py` em um ambiente de desenvolvimento como o Visual Studio Code, PyCharm ou Jupyter Notebook e execute o código.
