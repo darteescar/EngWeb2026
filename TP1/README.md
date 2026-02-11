@@ -43,5 +43,5 @@ Depois, com esses dicionários, percorre cada tipo de intervenção e cada marca
 Para executar o script, basta:
 
 ```bash
-python3 TP1/script.py
+python3 script.py
 ```
