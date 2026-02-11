@@ -18,7 +18,7 @@
 
 O programa percorre o dataset de reparações e, para cada reparação:
 
-- 1-Cria uma página HTML da reparação.
+- 1- Cria uma página HTML da reparação.
 
 - 2- Atualiza um dicionário de tipos de intervenção, que adiciona novas intervenções e guarda em quais reparações aparecem.
 
