@@ -89,11 +89,11 @@ var treinosServer = http.createServer((req, res) => {
                         var infosatleta = resp.data
                         res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
                         res.end(templates.analiseAtletaPage(infosatleta))
-                    })    
+                    })
                 }
                 break
             case "POST":
-                if (req.url == '/emd') {
+                if (req.url == '/emd') {    
                     console.log("post criar registo")
                     collectRequestBodyData(req, result => {
                         if(result){
@@ -121,10 +121,16 @@ var treinosServer = http.createServer((req, res) => {
                     var idatleta = req.url.split('/')[3]
                     collectRequestBodyData(req, result => {
                         if(result){
-                            axios.put('http://localhost:3000/atletas'+ idatleta, result)
+                            axios.put('http://localhost:3000/atletas/' + idatleta, result)
                             .then(resp => {
                                 res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
-                                res.write('<p>Registo inserido com sucesso: ' + JSON.stringify(resp.data) + '</p>')
+                                res.write('<p>Registo atualizado com sucesso: ' + JSON.stringify(resp.data) + '</p>')
+                                res.end('<address><a href="/">Voltar</a></address>')
+                            })
+                            .catch(erro => {
+                                res.writeHead(503, {'Content-Type': 'text/html; charset=utf-8'})
+                                res.write('<p>Erro ao atualizar o registo...</p>')
+                                res.write('<p>' + erro + '</p>')
                                 res.end('<address><a href="/">Voltar</a></address>')
                             })
                         }
