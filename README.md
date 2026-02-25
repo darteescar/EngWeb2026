@@ -12,3 +12,6 @@ Este repositório contém os trabalhos práticos realizados durante a disciplina
 - [TPC6](TP6/README.md): descrição e arquivos do sexto trabalho prático.
 - [TPC7](TP7/README.md): descrição e arquivos do sétimo trabalho prático.
 - [TPC8](TP8/README.md): descrição e arquivos do oitavo trabalho prático.
+
+
+PARA EXECUTAR SÓ NA DIRETORIA TP4/
