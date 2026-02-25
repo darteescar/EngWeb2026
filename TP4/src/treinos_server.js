@@ -51,13 +51,16 @@ var treinosServer = http.createServer((req, res) => {
                     .then(resp => {
                         var analises = resp.data
                         if (crescente === 1) {
-                            analises.sort((a,b) => (a.nome.primeiro + ' ' + a.nome["último"]).localeCompare(b.nome.primeiro + ' ' + b.nome["último"]));
+                            analises.sort((a,b) => (a.primeiro_nome + ' ' + a.ultimo_nome).localeCompare(b.primeiro_nome + ' ' + b.ultimo_nome));
                         } else if (crescente === 2 ){
-                            analises.sort((a,b) => (b.nome.primeiro + ' ' + b.nome["último"]).localeCompare(a.nome.primeiro + ' ' + a.nome["último"]));
+                            analises.sort((a,b) => (b.primeiro_nome + ' ' + b.ultimo_nome).localeCompare(a.primeiro_nome + ' ' + a.ultimo_nome));
                         }
                         res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
                         res.end(templates.analisesListPage(analises))
                     })
+                }
+                else if (req.url == '/emd/registo') {
+
                 }
                 // GET /emd/:id ---------------------------------------------------------
                 else if(/\/emd\/[0-9a-zA-Z_]+$/.test(req.url)){
