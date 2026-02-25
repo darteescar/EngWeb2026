@@ -39,8 +39,9 @@ var treinosServer = http.createServer((req, res) => {
     else{
         switch(req.method){
             case "GET": 
-                // GET / ou /emd ------------------------------------------------------------------
+                // GET / ou /emd
                 if(req.url == '/' || req.url == '/emd' || req.url.startsWith('/emd?')){
+                    console.log("Página inicial")
                     var crescente = 0;
                     if(/\/emd\?ordenar=nomeCrescente$/.test(req.url)) {
                         crescente = 1;
@@ -59,19 +60,96 @@ var treinosServer = http.createServer((req, res) => {
                         res.end(templates.analisesListPage(analises))
                     })
                 }
-                else if (req.url == '/emd/registo') {
-
+                else if (req.url == '/emd/registo'){
+                    console.log("Página de criar registo")
+                    res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
+                    res.end(templates.formExamePage())
                 }
-                // GET /emd/:id ---------------------------------------------------------
+                // GET /emd/editar/:id
+                else if (/\/emd\/editar\/[0-9a-zA-Z_]+$/.test(req.url)){
+                    console.log("Página editar registo")
+                    var idreg = req.url.split('/')[3]
+                    axios.get('http://localhost:3000/atletas/' + idreg)
+                    .then(resp => {
+                        var treino = resp.data
+                        res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
+                        res.end(templates.formExamePage(treino))
+                    })
+                    .catch(erro => {
+                        res.writeHead(505, {'Content-Type': 'text/html; charset=utf-8'})
+                        res.end('<address><a href="/">Voltar</a></address>')
+                    })
+                }
+                // GET /emd/:id
                 else if(/\/emd\/[0-9a-zA-Z_]+$/.test(req.url)){
-                    var idatleta = req.url.split('/')[2]
-                    axios.get('http://localhost:3000/atletas/' + idatleta)
+                    console.log("Página registo")
+                    var idreg = req.url.split('/')[2]
+                    axios.get('http://localhost:3000/atletas/' + idreg)
                     .then(resp => {
                         var infosatleta = resp.data
                         res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
                         res.end(templates.analiseAtletaPage(infosatleta))
+                    })    
+                }
+                break
+            case "POST":
+                if (req.url == '/emd') {
+                    console.log("post criar registo")
+                    collectRequestBodyData(req, result => {
+                        if(result){
+                            axios.post('http://localhost:3000/atletas', result)
+                            .then(resp => {
+                                res.writeHead(201, {'Content-Type': 'text/html; charset=utf-8'})
+                                res.write('<p>Registo inserido com sucesso: ' + JSON.stringify(resp.data) + '</p>')
+                                res.end('<address><a href="/">Voltar</a></address>')
+                            })
+                            .catch(erro => {
+                                res.writeHead(503, {'Content-Type': 'text/html; charset=utf-8'})
+                                res.write('<p>Não foi possível inserir o registo...</p>')
+                                res.write('<p>' + erro + '</p>')
+                                res.end('<address><a href="/">Voltar</a></address>')
+                            })
+                        }
+                        else {
+                            res.writeHead(502, {'Content-Type': 'text/html; charset=utf-8'})
+                            res.write('<p>NÃ£o foi possível obter os dados do body...</p>')
+                            res.end('<address><a href="/">Voltar</a></address>')
+                        }
                     })
-                    
+                } else if (/\/emd\/editar\/[0-9a-zA-Z_]+$/.test(req.url)) {
+                    console.log("Página post editar registo")
+                    var idatleta = req.url.split('/')[3]
+                    collectRequestBodyData(req, result => {
+                        if(result){
+                            axios.put('http://localhost:3000/atletas'+ idatleta, result)
+                            .then(resp => {
+                                res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
+                                res.write('<p>Registo inserido com sucesso: ' + JSON.stringify(resp.data) + '</p>')
+                                res.end('<address><a href="/">Voltar</a></address>')
+                            })
+                        }
+                        else {
+                            res.writeHead(502, {'Content-Type': 'text/html; charset=utf-8'})
+                            res.write('<p>Não foi possível obter os dados do body...</p>')
+                            res.end('<address><a href="/">Voltar</a></address>')
+                        }
+                    })
+                } else if (/\/emd\/apagar\/[0-9a-zA-Z_]+$/.test(req.url)) {
+                    console.log("POST apagar registo")
+                    var idatleta = req.url.split('/')[3]
+                    axios.delete('http://localhost:3000/atletas/' + idatleta)
+                    .then(resp => {
+                        res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
+                        res.write('<p>Registo apagado com sucesso!</p>')
+                        res.write('<p>Dados apagados: ' + JSON.stringify(resp.data) + '</p>')
+                        res.end('<address><a href="/">Voltar à página inicial</a></address>')
+                    })
+                    .catch(erro => {
+                        res.writeHead(503, {'Content-Type': 'text/html; charset=utf-8'})
+                        res.write('<p>Erro ao apagar o registo...</p>')
+                        res.write('<p>' + erro + '</p>')
+                        res.end('<address><a href="/">Voltar</a></address>')
+                    })
                 }
                 break
             default: 

@@ -39,5 +39,7 @@ block content
         tr
           th Resultado
           td= t.resultado ? 'Aprovado' : 'Reprovado'
+      a.w3-button.w3-teal.w3-medium.w3-margin-top.w3-left.w3-margin(href='/emd/editar/'+t.id) Editar Registo
+      form(method='POST' action='/emd/apagar/'+t.id style='display:inline')
+        button.w3-button.w3-red.w3-medium.w3-margin-top.w3-left.w3-margin(type='submit') Apagar Registo
       a.w3-button.w3-teal.w3-medium.w3-margin-top.w3-left.w3-margin(href="/emd") Voltar à lista
-  
