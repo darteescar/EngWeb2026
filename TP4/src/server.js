@@ -138,8 +138,7 @@ var treinosServer = http.createServer((req, res) => {
                             axios.post('http://localhost:3000/atletas', result)
                             .then(resp => {
                                 res.writeHead(201, {'Content-Type': 'text/html; charset=utf-8'})
-                                res.write('<p>Registo inserido com sucesso: ' + JSON.stringify(resp.data) + '</p>')
-                                res.end('<address><a href="/">Voltar</a></address>')
+                                res.end(templates.analiseAtletaPage(resp.data, "Registo criado com sucesso!"))
                             })
                             .catch(erro => {
                                 res.writeHead(503, {'Content-Type': 'text/html; charset=utf-8'})
@@ -162,7 +161,7 @@ var treinosServer = http.createServer((req, res) => {
                                 axios.put('http://localhost:3000/atletas/' + idatleta, result)
                                 .then(resp2 => {
                                     res.writeHead(503, {'Content-Type': 'text/html; charset=utf-8'})
-                                    res.end(templates.analiseAtletaPage(resp2.data))
+                                    res.end(templates.analiseAtletaPage(resp2.data, "Registo atualizado com sucesso!"))
                                 })
                                 .catch(erro => {
                                     res.writeHead(503, {'Content-Type': 'text/html; charset=utf-8'})
@@ -185,7 +184,7 @@ var treinosServer = http.createServer((req, res) => {
                         axios.delete('http://localhost:3000/atletas/' + idatleta)
                         .then(resp2 => {
                             res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
-                            res.end(templates.deletedPage(resp.data))
+                            res.end(templates.deletedPage(resp.data, "Registo apagado com sucesso!"))
                         })
                         .catch(erro => {
                             res.writeHead(503, {'Content-Type': 'text/html; charset=utf-8'})
