@@ -28,7 +28,7 @@ O programa é um servidor que serve páginas HTML geradas a partir de um dataset
 
 # Resultados:
 
-- [server_API](./server_API.js) - O script Node.js que implementa o servidor para servir as páginas HTML geradas a partir do dataset.
+- [server_API](./server_API.js) - O script js que implementa o servidor para servir as páginas HTML geradas a partir do dataset.
 
 # Execução:
 
