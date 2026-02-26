@@ -8,3 +8,5 @@ function renderPug(fileName, data) {
 exports.analisesListPage = (lista_analises) => renderPug('index', { list: lista_analises });
 exports.analiseAtletaPage = (a) => renderPug('emd', { t: a });
 exports.formExamePage = (exame) => renderPug('form', { exame: exame });
+exports.statsPage = (generos, modalidades, clubes, resultados, federados) => renderPug('stats', { generos, modalidades, clubes, resultados, federados });
+exports.deletedPage = (t) => renderPug('deleted', { t: t });

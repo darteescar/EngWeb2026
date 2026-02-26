@@ -241,21 +241,6 @@
       "ultimo_nome": "Bishop"
     },
     {
-      "index": 16,
-      "dataEMD": "2019-07-13",
-      "idade": 33,
-      "género": "F",
-      "morada": "Ruckersville",
-      "modalidade": "SUP",
-      "clube": "EDViana",
-      "email": "woodard.bennett@edviana.ca",
-      "federado": false,
-      "resultado": true,
-      "id": "60b3ee0e3f327a6ba71f77b0",
-      "primeiro_nome": "Woodard",
-      "ultimo_nome": "Bennett"
-    },
-    {
       "index": 17,
       "dataEMD": "2019-09-15",
       "idade": 27,
@@ -1006,21 +991,6 @@
       "ultimo_nome": "Roberts"
     },
     {
-      "index": 67,
-      "dataEMD": "2019-06-26",
-      "idade": 33,
-      "género": "F",
-      "morada": "Fillmore",
-      "modalidade": "Dança",
-      "clube": "GDGoma",
-      "email": "watson.lynch@gdgoma.tv",
-      "federado": true,
-      "resultado": false,
-      "id": "60b3ee0e9f0c3dbf2ecc854f",
-      "primeiro_nome": "Watson",
-      "ultimo_nome": "Lynch"
-    },
-    {
       "index": 68,
       "dataEMD": "2021-05-14",
       "idade": 23,
@@ -1079,21 +1049,6 @@
       "id": "60b3ee0e553355b77862ea98",
       "primeiro_nome": "Tina",
       "ultimo_nome": "Blankenship"
-    },
-    {
-      "index": 72,
-      "dataEMD": "2021-04-11",
-      "idade": 34,
-      "género": "M",
-      "morada": "Fairview",
-      "modalidade": "Parapente",
-      "clube": "AVCfamalicão",
-      "email": "whitehead.montgomery@avcfamalicão.org",
-      "federado": true,
-      "resultado": true,
-      "id": "60b3ee0ee3bb3fd71f515d88",
-      "primeiro_nome": "Whitehead",
-      "ultimo_nome": "Montgomery"
     },
     {
       "index": 73,
@@ -1486,21 +1441,6 @@
       "ultimo_nome": "Brewer"
     },
     {
-      "index": 99,
-      "dataEMD": "2019-10-13",
-      "idade": 34,
-      "género": "M",
-      "morada": "Heil",
-      "modalidade": "Badminton",
-      "clube": "Vitoria",
-      "email": "wilder.greene@vitoria.com",
-      "federado": false,
-      "resultado": false,
-      "id": "60b3ee0e9dc10b681d5212b5",
-      "primeiro_nome": "Wilder",
-      "ultimo_nome": "Greene"
-    },
-    {
       "index": 0,
       "dataEMD": "2019-06-23",
       "idade": 21,
@@ -1876,19 +1816,18 @@
       "ultimo_nome": "Horn"
     },
     {
-      "index": 25,
+      "id": "60b3ee81146b3cd8954b7256",
       "dataEMD": "2019-09-04",
-      "idade": 24,
+      "primeiro_nome": "Viola",
+      "ultimo_nome": "Medi",
+      "idade": "24",
       "género": "M",
       "morada": "Nipinnawasee",
       "modalidade": "Esgrima",
       "clube": "EDViana",
       "email": "viola.medina@edviana.biz",
-      "federado": true,
-      "resultado": false,
-      "id": "60b3ee81146b3cd8954b7256",
-      "primeiro_nome": "Viola",
-      "ultimo_nome": "Medina"
+      "federado": "",
+      "resultado": ""
     },
     {
       "index": 26,
@@ -1964,21 +1903,6 @@
       "id": "60b3ee817c1ce5b6cb67302a",
       "primeiro_nome": "Christensen",
       "ultimo_nome": "Boyd"
-    },
-    {
-      "index": 31,
-      "dataEMD": "2019-03-18",
-      "idade": 31,
-      "género": "M",
-      "morada": "Greenfields",
-      "modalidade": "Andebol",
-      "clube": "AmigosMontanha",
-      "email": "workman.franks@amigosmontanha.co.uk",
-      "federado": true,
-      "resultado": true,
-      "id": "60b3ee81cdbf91a4db1113eb",
-      "primeiro_nome": "Workman",
-      "ultimo_nome": "Franks"
     },
     {
       "index": 32,
@@ -2369,21 +2293,6 @@
       "id": "60b3ee8152ddb1911c44b96a",
       "primeiro_nome": "Hooper",
       "ultimo_nome": "Kirby"
-    },
-    {
-      "index": 58,
-      "dataEMD": "2020-12-30",
-      "idade": 24,
-      "género": "F",
-      "morada": "Faxon",
-      "modalidade": "Esgrima",
-      "clube": "AVCfamalicão",
-      "email": "wolfe.baird@avcfamalicão.org",
-      "federado": false,
-      "resultado": false,
-      "id": "60b3ee81839f04840d199de9",
-      "primeiro_nome": "Wolfe",
-      "ultimo_nome": "Baird"
     },
     {
       "index": 59,
@@ -3601,21 +3510,6 @@
       "ultimo_nome": "Baldwin"
     },
     {
-      "index": 41,
-      "dataEMD": "2020-10-16",
-      "idade": 35,
-      "género": "M",
-      "morada": "Valle",
-      "modalidade": "Parapente",
-      "clube": "GDGoma",
-      "email": "warner.bullock@gdgoma.biz",
-      "federado": false,
-      "resultado": true,
-      "id": "60b3eeb91ab516aa15e1199a",
-      "primeiro_nome": "Warner",
-      "ultimo_nome": "Bullock"
-    },
-    {
       "index": 42,
       "dataEMD": "2019-12-18",
       "idade": 32,
@@ -4171,21 +4065,6 @@
       "ultimo_nome": "Woodward"
     },
     {
-      "index": 79,
-      "dataEMD": "2020-02-24",
-      "idade": 33,
-      "género": "M",
-      "morada": "Gila",
-      "modalidade": "Dança",
-      "clube": "ACRroriz",
-      "email": "wilkins.cummings@acrroriz.us",
-      "federado": true,
-      "resultado": true,
-      "id": "60b3eeb9ef81456a2178baca",
-      "primeiro_nome": "Wilkins",
-      "ultimo_nome": "Cummings"
-    },
-    {
       "index": 80,
       "dataEMD": "2021-02-04",
       "idade": 35,
@@ -4364,21 +4243,6 @@
       "id": "60b3eeb97a2511a770990f0f",
       "primeiro_nome": "Becker",
       "ultimo_nome": "Talley"
-    },
-    {
-      "index": 92,
-      "dataEMD": "2019-08-11",
-      "idade": 30,
-      "género": "F",
-      "morada": "Shasta",
-      "modalidade": "Equitação",
-      "clube": "Clube de Orientação do Minho",
-      "email": "zelma.bell@clube de orientação do minho.com",
-      "federado": true,
-      "resultado": false,
-      "id": "60b3eeb9080a93e404ab974a",
-      "primeiro_nome": "Zelma",
-      "ultimo_nome": "Bell"
     },
     {
       "index": 93,

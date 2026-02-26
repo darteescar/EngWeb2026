@@ -60,6 +60,44 @@ var treinosServer = http.createServer((req, res) => {
                         res.end(templates.analisesListPage(analises))
                     })
                 }
+                else if (req.url == '/emd/stats'){
+                    console.log("Página Stats")
+                    axios.get("http://localhost:3000/atletas")
+                    .then(resp => {
+                        var analises = resp.data
+                        generos = {}
+                        modalidades = {}
+                        clubes = {}
+                        resultados = {}
+                        federados = {}
+                        
+                        exames = analises
+
+                        exames.forEach(a => {
+                            // Género
+                            generos[a.género] = (generos[a.género] || 0) + 1
+
+                            // Modalidade
+                            modalidades[a.modalidade] = (modalidades[a.modalidade] || 0) + 1
+
+                            // Clube
+                            clubes[a.clube] = (clubes[a.clube] || 0) + 1
+
+                            let chaveResultado = a.resultado ? "Apto" : "Não Apto"
+
+                            // Resultado (Apto e Não Apto)
+                            resultados[chaveResultado] = (resultados[chaveResultado] || 0) + 1
+
+                            // Federado (Apto e Não Apto)
+                            federados[chaveResultado] = (federados[chaveResultado] || 0) + 1
+                        })
+
+                        res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
+                        res.end(templates.statsPage(generos, modalidades, clubes, resultados, federados))
+                    })
+
+                }
+
                 else if (req.url == '/emd/registo'){
                     console.log("Página de criar registo")
                     res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
@@ -121,18 +159,17 @@ var treinosServer = http.createServer((req, res) => {
                     var idatleta = req.url.split('/')[3]
                     collectRequestBodyData(req, result => {
                         if(result){
-                            axios.put('http://localhost:3000/atletas/' + idatleta, result)
-                            .then(resp => {
-                                res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
-                                res.write('<p>Registo atualizado com sucesso: ' + JSON.stringify(resp.data) + '</p>')
-                                res.end('<address><a href="/">Voltar</a></address>')
-                            })
-                            .catch(erro => {
-                                res.writeHead(503, {'Content-Type': 'text/html; charset=utf-8'})
-                                res.write('<p>Erro ao atualizar o registo...</p>')
-                                res.write('<p>' + erro + '</p>')
-                                res.end('<address><a href="/">Voltar</a></address>')
-                            })
+                                axios.put('http://localhost:3000/atletas/' + idatleta, result)
+                                .then(resp2 => {
+                                    res.writeHead(503, {'Content-Type': 'text/html; charset=utf-8'})
+                                    res.end(templates.analiseAtletaPage(resp2.data))
+                                })
+                                .catch(erro => {
+                                    res.writeHead(503, {'Content-Type': 'text/html; charset=utf-8'})
+                                    res.write('<p>Erro ao atualizar o registo...</p>')
+                                    res.write('<p>' + erro + '</p>')
+                                    res.end('<address><a href="/">Voltar</a></address>')
+                                })
                         }
                         else {
                             res.writeHead(502, {'Content-Type': 'text/html; charset=utf-8'})
@@ -143,16 +180,24 @@ var treinosServer = http.createServer((req, res) => {
                 } else if (/\/emd\/apagar\/[0-9a-zA-Z_]+$/.test(req.url)) {
                     console.log("POST apagar registo")
                     var idatleta = req.url.split('/')[3]
-                    axios.delete('http://localhost:3000/atletas/' + idatleta)
+
+                    axios.get('http://localhost:3000/atletas/' + idatleta)
                     .then(resp => {
-                        res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
-                        res.write('<p>Registo apagado com sucesso!</p>')
-                        res.write('<p>Dados apagados: ' + JSON.stringify(resp.data) + '</p>')
-                        res.end('<address><a href="/">Voltar à página inicial</a></address>')
+                        axios.delete('http://localhost:3000/atletas/' + idatleta)
+                        .then(resp2 => {
+                            res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'})
+                            res.end(templates.deletedPage(resp.data))
+                        })
+                        .catch(erro => {
+                            res.writeHead(503, {'Content-Type': 'text/html; charset=utf-8'})
+                            res.write('<p>Erro ao apagar o registo...</p>')
+                            res.write('<p>' + erro + '</p>')
+                            res.end('<address><a href="/">Voltar</a></address>')
+                        })
                     })
                     .catch(erro => {
                         res.writeHead(503, {'Content-Type': 'text/html; charset=utf-8'})
-                        res.write('<p>Erro ao apagar o registo...</p>')
+                        res.write('<p>Erro ao obter os dados do registo a apagar...</p>')
                         res.write('<p>' + erro + '</p>')
                         res.end('<address><a href="/">Voltar</a></address>')
                     })
