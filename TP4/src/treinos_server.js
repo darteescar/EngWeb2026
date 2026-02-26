@@ -180,7 +180,6 @@ var treinosServer = http.createServer((req, res) => {
                 } else if (/\/emd\/apagar\/[0-9a-zA-Z_]+$/.test(req.url)) {
                     console.log("POST apagar registo")
                     var idatleta = req.url.split('/')[3]
-
                     axios.get('http://localhost:3000/atletas/' + idatleta)
                     .then(resp => {
                         axios.delete('http://localhost:3000/atletas/' + idatleta)
@@ -208,10 +207,6 @@ var treinosServer = http.createServer((req, res) => {
         }
     }
 })
-
 treinosServer.listen(7777, ()=>{
     console.log("Servidor à  escuta na porta 7777...")
 })
-
-
-
