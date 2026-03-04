@@ -91,4 +91,54 @@ router.get('/atores/:id', function(req, res, next) {
   })
 });
 
+router.get('/generos', function(req, res, next) {
+  var d = new Date().toISOString().substring(0, 16)
+  axios.get("http://localhost:3000/filmes/")
+    .then(resp => {
+      generos = {}
+      var filmes = resp.data     
+      filmes.forEach(filme => {
+        if (Array.isArray(filme.genres)) {
+          filme.genres.forEach(genero => {
+            if (genero) {
+              if (!generos[genero]) {
+                generos[genero] = { name: genero, num_filmes: 1 };
+              } else {
+                generos[genero].num_filmes++;
+              }
+            }
+          });
+        }
+      });
+
+      res.render('generos', { lista: Object.values(generos), date: d });
+  })
+});
+
+router.get('/generos/:id', function(req, res, next) {
+  var d = new Date().toISOString().substring(0, 16)
+  axios.get("http://localhost:3000/filmes/")
+    .then(resp => {
+      generos = {}
+      var filmes_da_bd = resp.data 
+      filmes_da_bd.forEach(filme => {
+        if (Array.isArray(filme.genres)) {
+          filme.genres.forEach(genero => {
+            if (genero) {
+              if (!generos[genero]) {
+                generos[genero] = { 
+                  name: genero,
+                  filmes: [{ id: filme.id, title: filme.title }]
+                };
+              } else {
+                generos[genero].filmes.push({ id: filme.id, title: filme.title });
+              }
+            }
+          });
+        }
+      });
+      res.render('genero', { elem: generos[req.params.id], date: d });
+  })
+});
+
 module.exports = router;
