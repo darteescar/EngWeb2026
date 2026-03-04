@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  .w3-card-4
+    header.w3-container.w3-teal
+      h1 Informações do/a ator/atriz 
+        b #{elem.nome}
+
+    .w3-container
+      table.w3-table-all.w3-margin-top
+        tr 
+          th Filmes
+        each filme in elem.filmes
+          tr.w3-hover-dark-grey(
+            onclick=`window.location='/filmes/${filme.id}'`
+            style="cursor:pointer"
+          ) 
+            td= filme.title
