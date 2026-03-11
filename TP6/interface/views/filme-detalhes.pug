@@ -1,0 +1,33 @@
+extends layout.pug
+
+block content
+  .w3-container
+    .w3-bar.w3-light-grey
+      a.w3-bar-item.w3-button(href='/filmes') Filmes
+      a.w3-bar-item.w3-button(href='/atores') Atores
+      a.w3-bar-item.w3-button(href='/generos') Géneros
+    
+    h2.w3-margin-top= filme.titulo
+    .w3-panel.w3-pale-blue.w3-border
+      p
+        strong ID: 
+        span= filme.id
+      p
+        strong Ano: 
+        span= filme.ano
+      
+      if filme.atores && filme.atores.length > 0
+        p
+          strong Atores (#{filme.atores.length}):
+        ul.w3-ul
+          each ator in filme.atores
+            li= ator
+      
+      if filme.generos && filme.generos.length > 0
+        p
+          strong Géneros (#{filme.generos.length}):
+        ul.w3-ul
+          each genero in filme.generos
+            li= genero
+    
+    a.w3-button.w3-teal(href='/filmes') ← Voltar

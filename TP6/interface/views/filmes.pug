@@ -1,0 +1,28 @@
+extends layout.pug
+
+block content
+  .w3-container
+    h2 Lista de Filmes (#{filmes.length})
+    
+    .w3-bar.w3-light-grey
+      a.w3-bar-item.w3-button.w3-teal(href='/filmes') Filmes
+      a.w3-bar-item.w3-button(href='/atores') Atores
+      a.w3-bar-item.w3-button(href='/generos') Géneros
+    
+    table.w3-table-all.w3-margin-top
+      tr.w3-teal
+        th ID
+        th Título
+        th Ano
+        th Nº Atores
+        th Nº Géneros
+      each f in filmes
+        tr.w3-hover-dark-grey(
+              onclick=`window.location='/filmes/${f.id}'`
+              style="cursor:pointer"
+            )
+          td= f.id
+          td= f.titulo
+          td= f.ano
+          td= f.num_atores
+          td= f.num_generos
